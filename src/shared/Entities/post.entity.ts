@@ -1,10 +1,8 @@
-import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity('Post')
 export class Post {
-  @ObjectIdColumn()
-  _id: string;
-
   @PrimaryColumn()
   id: string;
 
@@ -16,4 +14,7 @@ export class Post {
 
   @Column()
   likes: number;
+
+  @ManyToOne((_type) => User, (user) => user.posts, { eager: false })
+  user: User;
 }

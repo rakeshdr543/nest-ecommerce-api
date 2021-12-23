@@ -1,13 +1,12 @@
-import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+
+import { Post } from './post.entity';
 
 @Entity('User')
 export class User {
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);
   }
-
-  @ObjectIdColumn()
-  _id: string;
 
   @PrimaryColumn()
   id: string;
@@ -26,4 +25,7 @@ export class User {
 
   @Column()
   isActive: boolean;
+
+  @OneToMany((_type) => Post, (post) => post.user, { eager: true })
+  posts: Post[];
 }
