@@ -24,6 +24,9 @@ export class User {
   @Column({ default: UserRole.USER })
   role: string;
 
+  @Column({ default: '' })
+  image: string;
+
   @Column({ default: true })
   isActive: boolean;
 

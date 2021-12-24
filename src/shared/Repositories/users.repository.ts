@@ -32,4 +32,9 @@ export class UsersRepository extends Repository<User> {
 
     await this.save(newUser);
   }
+
+  async deleteUserAccount(user: User) {
+    user.isActive = false;
+    await this.save(user);
+  }
 }

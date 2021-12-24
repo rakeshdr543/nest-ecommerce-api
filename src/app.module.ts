@@ -4,8 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
 import { User } from './shared/Entities/user.entity';
-import { PostModule } from './post/post.module';
+import { PostModule } from './posts/post.module';
 import { Post } from './shared/Entities/post.entity';
+import { CommentsModule } from './comments/comments.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { Post } from './shared/Entities/post.entity';
       }),
     }),
     PostModule,
+    CommentsModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
