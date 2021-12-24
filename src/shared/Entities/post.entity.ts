@@ -1,9 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity('Post')
 export class Post {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -12,9 +12,12 @@ export class Post {
   @Column({ nullable: true, type: 'text' })
   body: string;
 
-  @Column()
+  @Column({ default: 0 })
   likes: number;
 
-  @ManyToOne((_type) => User, (user) => user.posts, { eager: false })
+  @Column()
+  createdAt: string;
+
+  @ManyToOne((_type) => User, (user) => user.posts)
   user: User;
 }

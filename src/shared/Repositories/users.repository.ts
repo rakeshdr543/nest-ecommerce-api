@@ -1,6 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 import * as bcrypt from 'bcrypt';
 
 import { User } from '../Entities/user.entity';
@@ -14,7 +13,7 @@ export class UsersRepository extends Repository<User> {
   }
 
   async createUser(createAccountDto: CreateAccountDto) {
-    const { fullName, email, password } = createAccountDto;
+    const { username, email, password } = createAccountDto;
     const userExists = await this.findOne({ email });
     if (userExists) {
       throw new BadRequestException('Account already exists');
@@ -24,12 +23,11 @@ export class UsersRepository extends Repository<User> {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      id: uuid(),
-      fullName,
+      username,
       email,
       password: hashedPassword,
-      isActive: true,
       role: UserRole.USER,
+      createdAt: new Date().toISOString(),
     });
 
     await this.save(newUser);

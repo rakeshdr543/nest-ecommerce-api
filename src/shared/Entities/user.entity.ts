@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UserRole } from '../Enums/role.entity';
 
 import { Post } from './post.entity';
 
@@ -8,11 +9,11 @@ export class User {
     Object.assign(this, partial);
   }
 
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  fullName: string;
+  username: string;
 
   @Column()
   email: string;
@@ -20,12 +21,15 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: UserRole.USER })
   role: string;
 
-  @Column()
+  @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany((_type) => Post, (post) => post.user, { eager: true })
+  @Column()
+  createdAt: string;
+
+  @OneToMany((_type) => Post, (post) => post.user)
   posts: Post[];
 }
