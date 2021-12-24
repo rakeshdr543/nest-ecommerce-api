@@ -9,6 +9,9 @@ export class Post {
   @Column()
   title: string;
 
+  @Column({ default: '' })
+  image: string;
+
   @Column({ nullable: true, type: 'text' })
   body: string;
 

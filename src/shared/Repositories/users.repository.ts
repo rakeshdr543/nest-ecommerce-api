@@ -3,7 +3,7 @@ import { EntityRepository, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 import { User } from '../Entities/user.entity';
-import { UserRole } from '../Enums/role.entity';
+import { UserRole } from '../Enums/role.enum';
 import { CreateAccountDto } from 'src/auth/Dto/create-account.dto';
 
 @EntityRepository(User)

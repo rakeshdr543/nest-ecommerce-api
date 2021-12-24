@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { UserRole } from '../Enums/role.entity';
+import { UserRole } from '../Enums/role.enum';
 
 import { Post } from './post.entity';
 

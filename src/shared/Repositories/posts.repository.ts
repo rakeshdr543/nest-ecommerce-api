@@ -1,8 +1,8 @@
 import { EntityRepository, Repository } from 'typeorm';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 import { CreatePostDto } from 'src/posts/Dto/create-post.dto';
 import { Post } from '../Entities/post.entity';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { User } from '../Entities/user.entity';
 import { UpdatePostDto } from 'src/posts/Dto/update-post.dto';
 

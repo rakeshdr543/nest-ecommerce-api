@@ -3,10 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
-import { User } from './shared/Entities/user.entity';
 import { PostModule } from './posts/post.module';
-import { Post } from './shared/Entities/post.entity';
-import { CommentsModule } from './comments/comments.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -30,7 +27,6 @@ import { UsersModule } from './users/users.module';
       }),
     }),
     PostModule,
-    CommentsModule,
     UsersModule,
   ],
   controllers: [],
