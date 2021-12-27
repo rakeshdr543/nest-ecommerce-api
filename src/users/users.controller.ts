@@ -21,7 +21,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get('/profile')
-  getUserProfile(@GetUser() user: User) {
+  getUserProfile(@GetUser() user: User): User {
     return user;
   }
 
@@ -48,7 +48,7 @@ export class UsersController {
   }
 
   @Delete('/profile')
-  deleteUserAccount(@GetUser() user: User) {
+  deleteUserAccount(@GetUser() user: User): Promise<void> {
     return this.usersService.deleteUserAccount(user);
   }
 }

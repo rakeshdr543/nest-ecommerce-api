@@ -24,11 +24,11 @@ export class PostService {
     return this.postsRepository.createPost(createPostDto, user);
   }
 
-  getAllPosts() {
+  getAllPosts(): Promise<Post[]> {
     return this.postsRepository.getAllPosts();
   }
 
-  getSinglePost(id: string) {
+  getSinglePost(id: string): Promise<Post> {
     return this.postsRepository.getSinglePost(id);
   }
 
@@ -57,15 +57,19 @@ export class PostService {
     return uploadData.secure_url;
   }
 
-  updatePost(postId: string, user: User, updatePostDto: UpdatePostDto) {
+  updatePost(
+    postId: string,
+    user: User,
+    updatePostDto: UpdatePostDto,
+  ): Promise<Post> {
     return this.postsRepository.updatePost(postId, user, updatePostDto);
   }
 
-  likePost(postId: string, user: User) {
+  likePost(postId: string, user: User): Promise<Post> {
     return this.postsRepository.likePost(postId, user);
   }
 
-  deletePost(postId: string, user: User) {
+  deletePost(postId: string, user: User): Promise<void> {
     return this.postsRepository.deletePost(postId, user);
   }
 }

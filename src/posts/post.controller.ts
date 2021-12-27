@@ -35,12 +35,12 @@ export class PostController {
   }
 
   @Get()
-  getAllPosts() {
+  getAllPosts(): Promise<PostEntity[]> {
     return this.postService.getAllPosts();
   }
 
   @Get('/:id')
-  getSinglePost(@Param('id') postId: string) {
+  getSinglePost(@Param('id') postId: string): Promise<PostEntity> {
     return this.postService.getSinglePost(postId);
   }
 
@@ -79,13 +79,19 @@ export class PostController {
 
   @Patch('/:id/like')
   @UseGuards(AuthGuard())
-  likePost(@Param('id') postId: string, @GetUser() user: User) {
+  likePost(
+    @Param('id') postId: string,
+    @GetUser() user: User,
+  ): Promise<PostEntity> {
     return this.postService.likePost(postId, user);
   }
 
   @Delete('/:id')
   @UseGuards(AuthGuard())
-  deletePost(@Param('id') postId: string, @GetUser() user: User) {
+  deletePost(
+    @Param('id') postId: string,
+    @GetUser() user: User,
+  ): Promise<void> {
     return this.postService.deletePost(postId, user);
   }
 }

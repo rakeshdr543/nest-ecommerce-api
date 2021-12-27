@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+
 import { Comment } from 'src/shared/Entities/comment.entity';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './Dto/create-comment.dto';
@@ -12,7 +13,7 @@ export class CommentsController {
   @Post()
   createComment(
     @Param('id') postId: string,
-    createCommentDto: CreateCommentDto,
+    @Body() createCommentDto: CreateCommentDto,
   ): Promise<void> {
     return this.commentService.createComment(postId, createCommentDto);
   }

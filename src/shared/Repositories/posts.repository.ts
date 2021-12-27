@@ -25,11 +25,11 @@ export class PostsRepository extends Repository<Post> {
     return post;
   }
 
-  async getAllPosts() {
+  async getAllPosts(): Promise<Post[]> {
     return this.find({});
   }
 
-  async getSinglePost(id: string) {
+  async getSinglePost(id: string): Promise<Post> {
     const post = await this.findOne({ id });
     if (!post) {
       throw new NotFoundException("Post doesn't exists");
@@ -37,7 +37,11 @@ export class PostsRepository extends Repository<Post> {
     return post;
   }
 
-  async updatePost(postId: string, user: User, updatePostDto: UpdatePostDto) {
+  async updatePost(
+    postId: string,
+    user: User,
+    updatePostDto: UpdatePostDto,
+  ): Promise<Post> {
     const { title, body } = updatePostDto;
     const post = await this.findOne({
       where: { id: postId },
@@ -47,12 +51,13 @@ export class PostsRepository extends Repository<Post> {
       post.title = title ? title : post.title;
       post.body = body;
       await this.save(post);
+      return post;
     } else {
       throw new BadRequestException();
     }
   }
 
-  async likePost(postId: string, user: User) {
+  async likePost(postId: string, user: User): Promise<Post> {
     const post = await this.findOne({
       where: { id: postId },
       relations: ['user'],
@@ -62,9 +67,10 @@ export class PostsRepository extends Repository<Post> {
     }
     post.likes = post.likes + 1;
     await this.save(post);
+    return post;
   }
 
-  async deletePost(postId: string, user: User) {
+  async deletePost(postId: string, user: User): Promise<void> {
     const post = await this.findOne({
       where: { id: postId },
       relations: ['user'],

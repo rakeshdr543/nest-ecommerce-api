@@ -29,7 +29,7 @@ export class Post {
   createdAt: string;
 
   @OneToMany((_type) => Comment, (comment) => comment.post)
-  comments: Comment[];
+  comments: Array<Comment>;
 
   @ManyToOne((_type) => User, (user) => user.posts)
   user: User;

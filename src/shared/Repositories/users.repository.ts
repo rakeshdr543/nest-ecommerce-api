@@ -12,7 +12,7 @@ export class UsersRepository extends Repository<User> {
     super();
   }
 
-  async createUser(createAccountDto: CreateAccountDto) {
+  async createUser(createAccountDto: CreateAccountDto): Promise<User> {
     const { username, email, password } = createAccountDto;
     const userExists = await this.findOne({ email });
     if (userExists) {
@@ -31,9 +31,10 @@ export class UsersRepository extends Repository<User> {
     });
 
     await this.save(newUser);
+    return newUser;
   }
 
-  async deleteUserAccount(user: User) {
+  async deleteUserAccount(user: User): Promise<void> {
     user.isActive = false;
     await this.save(user);
   }

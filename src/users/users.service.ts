@@ -32,7 +32,7 @@ export class UsersService {
     return uploadData.secure_url;
   }
 
-  deleteUserAccount(user: User) {
-    this.usersRepository.deleteUserAccount(user);
+  deleteUserAccount(user: User): Promise<void> {
+    return this.usersRepository.deleteUserAccount(user);
   }
 }
